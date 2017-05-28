@@ -1,22 +1,19 @@
 class Complement
+  DNA_RNA_MAP = {
+    'G' => 'C',
+    'C' => 'G',
+    'T' => 'A',
+    'A' => 'U'
+  }.freeze
+
   def self.of_dna(dna_strand)
     incorrect_nucleotide_flag = false
 
-    dna_strand = dna_strand.split("").map { |x|
-      case x
-      when 'G'
-        x = 'C'
-      when 'C'
-        x = 'G'
-      when 'T'
-        x = 'A'
-      when 'A'
-        x = 'U'
-      else
-        incorrect_nucleotide_flag = true
-      end
-    }
-    incorrect_nucleotide_flag ? '' : dna_strand.join
+    rna = dna_strand.chars.map { |nucleotide|
+      DNA_RNA_MAP[nucleotide] || incorrect_nucleotide_flag = true
+    }.join
+
+    incorrect_nucleotide_flag ? '' : rna
   end
 end
 
